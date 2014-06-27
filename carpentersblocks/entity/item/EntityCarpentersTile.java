@@ -391,8 +391,7 @@ public class EntityCarpentersTile extends EntityBase {
     @Override
     public boolean shouldRenderInPass(int pass)
     {
-        // TODO: Switch to pass 1 when alpha rendering is fixed.
-        return pass == 0;
+        return pass == 1;
     }
 
     /**

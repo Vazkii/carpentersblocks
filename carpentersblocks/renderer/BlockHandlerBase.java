@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
@@ -29,6 +30,7 @@ import carpentersblocks.util.handler.OverlayHandler;
 import carpentersblocks.util.handler.OverlayHandler.Overlay;
 import carpentersblocks.util.registry.FeatureRegistry;
 import carpentersblocks.util.registry.IconRegistry;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -517,42 +519,48 @@ public class BlockHandlerBase implements ISimpleBlockRenderingHandler {
     protected void renderMultiTexturedSide(ItemStack itemStack, int x, int y, int z, int side, IIcon icon)
     {
         Block block = BlockProperties.toBlock(itemStack);
-
-        // TODO: Revisit render passes when alpha rendering bug is fixed.
+        int renderPass = MinecraftForgeClient.getRenderPass();
 
         /* Render side */
 
-        int tempRotation = getRotation(side);
-        if (BlockProperties.blockRotates(itemStack)) {
-            setDirectionalRotation(side);
+        if (block.getRenderBlockPass() == renderPass) {
+            int tempRotation = getRotation(side);
+            if (BlockProperties.blockRotates(itemStack)) {
+                setDirectionalRotation(side);
+            }
+            setColorAndRender(itemStack, x, y, z, side, icon);
+            setRotation(side, tempRotation);
         }
-        setColorAndRender(itemStack, x, y, z, side, icon);
-        setRotation(side, tempRotation);
 
         /* Render BlockGrass side overlay here, if needed. */
 
-        if (block.equals(Blocks.grass) && side > 0 && !isPositiveFace(side)) {
-            if (Minecraft.isFancyGraphicsEnabled()) {
-                setColorAndRender(new ItemStack(Blocks.grass), x, y, z, side, BlockGrass.getIconSideOverlay());
-            } else {
-                setColorAndRender(new ItemStack(Blocks.dirt), x, y, z, side, IconRegistry.icon_overlay_fast_grass_side);
-            }
+        /* Alpha */
+        if (renderPass == 1) {
+	        if (block.equals(Blocks.grass) && side > 0 && !isPositiveFace(side)) {
+	            if (Minecraft.isFancyGraphicsEnabled()) {
+	                setColorAndRender(new ItemStack(Blocks.grass), x, y, z, side, BlockGrass.getIconSideOverlay());
+	            } else {
+	                setColorAndRender(new ItemStack(Blocks.dirt), x, y, z, side, IconRegistry.icon_overlay_fast_grass_side);
+	            }
+	        }
         }
 
         /* Render decorations. */
 
-        boolean temp_dye_state = suppressDyeColor;
-        suppressDyeColor = true;
+        /* Alpha */
+        if (renderPass == 1) {
+	        boolean temp_dye_state = suppressDyeColor;
+	        suppressDyeColor = true;
 
-        if (!suppressChiselDesign && BlockProperties.hasChiselDesign(TE, coverRendering)) {
-            renderChiselDesign(x, y, z, side);
+	        if (!suppressChiselDesign && BlockProperties.hasChiselDesign(TE, coverRendering)) {
+	            renderChiselDesign(x, y, z, side);
+	        }
+	        if (!suppressOverlay && BlockProperties.hasOverlay(TE, coverRendering)) {
+	            renderOverlay(block, x, y, z, side);
+	        }
+
+	        suppressDyeColor = temp_dye_state;
         }
-
-        if (!suppressOverlay && BlockProperties.hasOverlay(TE, coverRendering)) {
-            renderOverlay(block, x, y, z, side);
-        }
-
-        suppressDyeColor = temp_dye_state;
     }
 
     /**

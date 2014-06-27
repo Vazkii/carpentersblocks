@@ -97,14 +97,14 @@ public class BlockHandlerCarpentersLever extends BlockHandlerBase {
         float vecX = 0.0625F;
         float vecY = 0.625F;
         float vecZ = 0.0625F;
-        vector[0] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, 0.0D, -vecZ);
-        vector[1] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, 0.0D, -vecZ);
-        vector[2] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, 0.0D, vecZ);
-        vector[3] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, 0.0D, vecZ);
-        vector[4] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, vecY, -vecZ);
-        vector[5] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, vecY, -vecZ);
-        vector[6] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, vecY, vecZ);
-        vector[7] = renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, vecY, vecZ);
+        vector[0] = Vec3.createVectorHelper(-vecX, 0.0D, -vecZ);
+        vector[1] = Vec3.createVectorHelper(vecX, 0.0D, -vecZ);
+        vector[2] = Vec3.createVectorHelper(vecX, 0.0D, vecZ);
+        vector[3] = Vec3.createVectorHelper(-vecX, 0.0D, vecZ);
+        vector[4] = Vec3.createVectorHelper(-vecX, vecY, -vecZ);
+        vector[5] = Vec3.createVectorHelper(vecX, vecY, -vecZ);
+        vector[6] = Vec3.createVectorHelper(vecX, vecY, vecZ);
+        vector[7] = Vec3.createVectorHelper(-vecX, vecY, vecZ);
 
         /* Set up lever handle rotation. */
 

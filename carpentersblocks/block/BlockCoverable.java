@@ -28,6 +28,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
@@ -1113,12 +1114,8 @@ public class BlockCoverable extends BlockContainer {
      */
     public boolean canRenderInPass(int pass)
     {
-        // TODO: Uncomment code when alpha bugs are fixed.
-
-        //ForgeHooksClient.setRenderPass(pass);
-        //return true;
-
-        return super.canRenderInPass(pass);
+        ForgeHooksClient.setRenderPass(pass);
+        return true;
     }
 
     @Override
@@ -1128,8 +1125,7 @@ public class BlockCoverable extends BlockContainer {
      */
     public final int getRenderBlockPass()
     {
-        // TODO: Change to 1 when alpha renderpass bugs are sorted out.
-        return 0;
+        return 1;
     }
 
     @Override

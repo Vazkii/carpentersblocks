@@ -101,14 +101,14 @@ public class BlockHandlerCarpentersTorch extends BlockHandlerBase {
         float vecZ = 0.0625F;
 
         vec3 = new Vec3[] {
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, 0.5D, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, 0.5D, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, 0.5D, vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, 0.5D, vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, vecY, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, vecY, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, vecY, vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, vecY, vecZ)
+            Vec3.createVectorHelper(-vecX, 0.5D, -vecZ),
+            Vec3.createVectorHelper(vecX, 0.5D, -vecZ),
+            Vec3.createVectorHelper(vecX, 0.5D, vecZ),
+            Vec3.createVectorHelper(-vecX, 0.5D, vecZ),
+            Vec3.createVectorHelper(-vecX, vecY, -vecZ),
+            Vec3.createVectorHelper(vecX, vecY, -vecZ),
+            Vec3.createVectorHelper(vecX, vecY, vecZ),
+            Vec3.createVectorHelper(-vecX, vecY, vecZ)
         };
 
         setRotations(Torch.getFacing(TE), vec3, x, y, z);
@@ -128,14 +128,14 @@ public class BlockHandlerCarpentersTorch extends BlockHandlerBase {
         float vecZ = 0.0625F;
 
         vec3 = new Vec3[] {
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, 0.0D, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, 0.0D, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, 0.0D, vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, 0.0D, vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, vecY, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, vecY, -vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(vecX, vecY, vecZ),
-            renderBlocks.blockAccess.getWorldVec3Pool().getVecFromPool(-vecX, vecY, vecZ)
+            Vec3.createVectorHelper(-vecX, 0.0D, -vecZ),
+            Vec3.createVectorHelper(vecX, 0.0D, -vecZ),
+            Vec3.createVectorHelper(vecX, 0.0D, vecZ),
+            Vec3.createVectorHelper(-vecX, 0.0D, vecZ),
+            Vec3.createVectorHelper(-vecX, vecY, -vecZ),
+            Vec3.createVectorHelper(vecX, vecY, -vecZ),
+            Vec3.createVectorHelper(vecX, vecY, vecZ),
+            Vec3.createVectorHelper(-vecX, vecY, vecZ)
         };
 
         setRotations(Torch.getFacing(TE), vec3, x, y, z);

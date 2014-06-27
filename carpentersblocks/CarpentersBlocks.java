@@ -23,7 +23,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
         modid = CarpentersBlocks.MODID,
         name = "Carpenter's Blocks",
         version = CarpentersBlocks.VERSION,
-        dependencies = "required-after:Forge@[10.12.1.1060,)"
+        dependencies = "required-after:Forge@[10.13.0.1152,)"
         )
 public class CarpentersBlocks {
 

@@ -174,7 +174,7 @@ public class EventHandler {
             reachDist = ((EntityPlayerMP)entityPlayer).theItemInWorldManager.getBlockReachDistance();
         }
 
-        Vec3 vec1 = world.getWorldVec3Pool().getVecFromPool(xPos, yPos, zPos);
+        Vec3 vec1 = Vec3.createVectorHelper(xPos, yPos, zPos);
         Vec3 vec2 = vec1.addVector(xComp * reachDist, yComp * reachDist, zComp * reachDist);
 
         return world.rayTraceBlocks(vec1, vec2);
