@@ -38,11 +38,11 @@ import carpentersblocks.api.ICarpentersHammer;
 import carpentersblocks.renderer.helper.ParticleHelper;
 import carpentersblocks.tileentity.TEBase;
 import carpentersblocks.util.BlockProperties;
-import carpentersblocks.util.PlayerPermissions;
 import carpentersblocks.util.handler.DesignHandler;
 import carpentersblocks.util.handler.EventHandler;
 import carpentersblocks.util.handler.OverlayHandler;
 import carpentersblocks.util.handler.OverlayHandler.Overlay;
+import carpentersblocks.util.protection.PlayerPermissions;
 import carpentersblocks.util.registry.FeatureRegistry;
 import carpentersblocks.util.registry.IconRegistry;
 import carpentersblocks.util.registry.ItemRegistry;
@@ -997,7 +997,7 @@ public class BlockCoverable extends BlockContainer {
             TEBase TE = getTileEntity(world, x, y, z);
 
             if (TE != null) {
-                TE.setOwner(((EntityPlayer)entityLiving).getDisplayName());
+                TE.setOwner(entityLiving.getUniqueID());
             }
 
         }
@@ -1018,7 +1018,7 @@ public class BlockCoverable extends BlockContainer {
 
             Item item = itemStack.getItem();
             if (item instanceof ICarpentersHammer || item instanceof ICarpentersChisel) {
-                return -1.0F;
+                return -1;
             }
 
         }
